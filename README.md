@@ -41,3 +41,12 @@ Chương trình thực hiện các tác vụ sau:
 - **Các hàm dựng sẵn của trình duyệt:** `prompt()`, `console.log()`.
 - **Các hàm toán học:** `Math.round()`, `isNaN()`.
 - **Template Literals:** Dùng để tạo chuỗi biên lai đa dòng một cách dễ dàng và rõ ràng.
+
+---
+
+### Thông tin liên hệ
+
+Nếu có bất kỳ câu hỏi nào về dự án này, vui lòng liên hệ:
+
+- **Họ và tên:** Võ Quang Dũng
+- **Email:** vqd2k6@gmail.com
