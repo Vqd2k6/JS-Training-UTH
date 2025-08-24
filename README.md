@@ -1,52 +1,39 @@
-# Mini-Project: Ứng dụng tính lương nhân viên cơ bản
+# Bài tập và Dự án Mini - Week 02 - JS_Basic_1
 
-Ứng dụng JavaScript này là một mini-project nhỏ được xây dựng để thực hành các kiến thức cơ bản về ngôn ngữ, bao gồm: khai báo biến, các loại dữ liệu, hàm, toán tử, cấu trúc điều khiển và xử lý đầu vào từ người dùng.
+### Giới thiệu chung
+Đây là tập hợp các bài tập thực hành JavaScript cơ bản, bao gồm 8 bài tập nhỏ và một dự án mini. Mã nguồn được viết trong file `exercise.js` và được thiết kế để chạy trực tiếp trên trình duyệt web.
 
----
+### Cách chạy chương trình
+Các bài tập sử dụng các hàm như `prompt()` và `alert()` của trình duyệt. Để chạy từng bài tập, bạn cần thực hiện các bước sau:
 
-### Chức năng chính
+1.  Mở file `exercise.js` bằng một trình soạn thảo code (ví dụ: VS Code).
+2.  Bỏ dấu comment (`//`) ở đầu mỗi khối code của bài tập bạn muốn chạy.
+3.  Lưu file và kéo thả file `exercise.js` vào trình duyệt web của bạn.
+4.  Mở bảng điều khiển (Console) của trình duyệt (thường là F12) để tương tác và xem kết quả.
+5.  Sau khi hoàn thành một bài, hãy comment lại khối code đó trước khi chạy bài tiếp theo để tránh xung đột.
 
-Chương trình thực hiện các tác vụ sau:
+### Nội dung các bài tập
 
-- **Thu thập dữ liệu:** Sử dụng hàm `prompt()` để yêu cầu người dùng nhập các thông tin sau:
-  - Tên nhân viên (`name`)
-  - Lương cơ bản (`baseSalary`)
-  - Mức thưởng (`bonusRate`) (là một số thập phân từ 0 đến 1)
-  - Số giờ làm thêm (`overtimeHours`)
-- **Xác thực dữ liệu (Validation):**
-  - Kiểm tra để đảm bảo tên nhân viên không được để trống.
-  - Xác thực các giá trị lương, mức thưởng và giờ làm thêm phải là số.
-  - Đảm bảo mức thưởng nằm trong khoảng hợp lệ từ 0 đến 1.
-- **Tính toán:** Tính toán tổng lương thực nhận của nhân viên theo công thức:
-  - `Tổng lương = Lương cơ bản + (Lương cơ bản * Mức thưởng) + (Số giờ làm thêm * 50000)`
-- **Làm tròn:** Tổng lương được làm tròn đến số nguyên gần nhất (0 chữ số thập phân).
-- **Hiển thị:** In ra một biên lai lương chi tiết, trình bày rõ ràng trên giao diện console.
+#### 1. Bài tập (8 bài)
+Mỗi bài tập giải quyết một vấn đề cụ thể, bao gồm:
+-   **Bài 1**: Phân loại tuổi dựa trên các mốc: mầm non, tiểu học, THCS, THPT, và các trường hợp khác.
+-   **Bài 2**: Tính tổng các số từ 1 đến n, bao gồm cả tổng các số chẵn và số lẻ.
+-   **Bài 3**: Tìm giá trị nhỏ nhất, lớn nhất và trung bình của một mảng điểm số.
+-   **Bài 4**: Đảo ngược một chuỗi mà không sử dụng hàm `reverse()` có sẵn.
+-   **Bài 5**: Đếm số lượng số nguyên tố trong một mảng số đã cho.
+-   **Bài 6**: Tìm phần tử xuất hiện nhiều nhất (mode) trong một mảng và số lần nó xuất hiện.
+-   **Bài 7**: Tạo một ứng dụng quản lý công việc đơn giản với menu để thêm, xóa và in danh sách công việc.
+-   **Bài 8**: Xây dựng trò chơi đoán số, cung cấp gợi ý "lớn hơn" hoặc "bé hơn" cho đến khi người dùng đoán đúng.
 
----
+#### 2. Dự án Mini
+-   **Dự án**: Chương trình quản lý học sinh đơn giản.
+-   **Chức năng**:
+    -   Nhập danh sách điểm.
+    -   Tính điểm trung bình, điểm cao nhất và thấp nhất.
+    -   Phân loại điểm sang thang A, B, C, D.
+    -   Cung cấp menu để thực hiện các thao tác: xem danh sách, thêm, xóa điểm.
 
-### Cách sử dụng
+### Tác giả
+-   Võ Quang Dũng
+-   Gmail: Vqd2k6@gmail.com
 
-1. Mở trình duyệt web của bạn (ví dụ: Chrome, Firefox).
-2. Mở Developer Tools (Công cụ dành cho nhà phát triển) bằng cách nhấn `F12` hoặc `Ctrl+Shift+I` (trên Windows/Linux) hoặc `Cmd+Option+I` (trên macOS).
-3. Vào tab **Console**.
-4. Copy và dán toàn bộ mã nguồn vào Console và nhấn `Enter`.
-5. Các hộp thoại `prompt` sẽ lần lượt xuất hiện để bạn nhập thông tin.
-6. Sau khi hoàn tất, kết quả (biên lai lương) sẽ được in ra trên Console.
-
----
-
-### Công nghệ sử dụng
-
-- **JavaScript (ES6):** Ngôn ngữ chính để xây dựng ứng dụng.
-- **Các hàm dựng sẵn của trình duyệt:** `prompt()`, `console.log()`.
-- **Các hàm toán học:** `Math.round()`, `isNaN()`.
-- **Template Literals:** Dùng để tạo chuỗi biên lai đa dòng một cách dễ dàng và rõ ràng.
-
----
-
-### Thông tin liên hệ
-
-Nếu có bất kỳ câu hỏi nào về dự án này, vui lòng liên hệ:
-
-- **Họ và tên:** Võ Quang Dũng
-- **Email:** vqd2k6@gmail.com
