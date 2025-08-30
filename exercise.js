@@ -83,8 +83,8 @@ const iphones = [
 ];
 
 const iphonesCopy = [...iphones];    // tránh mutate 
-iphonesCopy.sort((a,b)=>{    // in-place function 
-    return (a.price - b.price) || a.name.localeCompare(b.name) ;   // nếu chênh lệch giá = 0 thì kiểm tra name 
+iphonesCopy.sort((a, b) => {    // in-place function 
+  return (a.price - b.price) || a.name.localeCompare(b.name);   // nếu chênh lệch giá = 0 thì kiểm tra name 
 });
 console.log(iphonesCopy);
 
@@ -115,28 +115,28 @@ console.log(entries);
 
 // 	6	Viết hàm groupBy(arr, keyFn) -> object nhóm phần tử theo giá trị key.
 const employees = [
-    { id: 1, name: 'Lê Văn A', position: 'DS', city: 'Hà Nội' },
-    { id: 2, name: 'Nguyễn Thị B', position: 'DEVops', city: 'TP. Hồ Chí Minh' },
-    { id: 3, name: 'Trần Văn C', position: 'AI', city: 'Đà Nẵng' },
-    { id: 4, name: 'Phạm Thị D', position: 'DS', city: 'Hà Nội' },
-    { id: 5, name: 'Hoàng Văn E', position: 'DE', city: 'Hải Phòng' },
-    { id: 6, name: 'Đỗ Thị F', position: 'DEVops', city: 'TP. Hồ Chí Minh' },
-    { id: 7, name: 'Ngô Văn G', position: 'AI', city: 'Cần Thơ' },
-    { id: 8, name: 'Vũ Thị H', position: 'DS', city: 'Hà Nội' },
-    { id: 9, name: 'Bùi Văn I', position: 'DE', city: 'TP. Hồ Chí Minh' },
-    { id: 10, name: 'Lý Thị K', position: 'AI', city: 'Đà Nẵng' },
-    { id: 11, name: 'Dương Văn L', position: 'DS', city: 'Cần Thơ' },
-    { id: 12, name: 'Đào Thị M', position: 'DE', city: 'Hà Nội' },
-    { id: 13, name: 'Trần Văn N', position: 'DEVops', city: 'Hải Phòng' },
-    { id: 14, name: 'Hoàng Thị O', position: 'AI', city: 'TP. Hồ Chí Minh' },
-    { id: 15, name: 'Ngô Văn P', position: 'DE', city: 'Đà Nẵng' }
+  { id: 1, name: 'Lê Văn A', position: 'DS', city: 'Hà Nội' },
+  { id: 2, name: 'Nguyễn Thị B', position: 'DEVops', city: 'TP. Hồ Chí Minh' },
+  { id: 3, name: 'Trần Văn C', position: 'AI', city: 'Đà Nẵng' },
+  { id: 4, name: 'Phạm Thị D', position: 'DS', city: 'Hà Nội' },
+  { id: 5, name: 'Hoàng Văn E', position: 'DE', city: 'Hải Phòng' },
+  { id: 6, name: 'Đỗ Thị F', position: 'DEVops', city: 'TP. Hồ Chí Minh' },
+  { id: 7, name: 'Ngô Văn G', position: 'AI', city: 'Cần Thơ' },
+  { id: 8, name: 'Vũ Thị H', position: 'DS', city: 'Hà Nội' },
+  { id: 9, name: 'Bùi Văn I', position: 'DE', city: 'TP. Hồ Chí Minh' },
+  { id: 10, name: 'Lý Thị K', position: 'AI', city: 'Đà Nẵng' },
+  { id: 11, name: 'Dương Văn L', position: 'DS', city: 'Cần Thơ' },
+  { id: 12, name: 'Đào Thị M', position: 'DE', city: 'Hà Nội' },
+  { id: 13, name: 'Trần Văn N', position: 'DEVops', city: 'Hải Phòng' },
+  { id: 14, name: 'Hoàng Thị O', position: 'AI', city: 'TP. Hồ Chí Minh' },
+  { id: 15, name: 'Ngô Văn P', position: 'DE', city: 'Đà Nẵng' }
 ];
 
 function groupBy(arr, key) {    // arr là mảng cần xếp, key là thuộc tính để sort 
-    return arr.reduce((pre, cur) => {
-        (pre[cur[key]] ||= []).push(cur);    // truy cập lấy value của thuộc tính keykiểm tra nó tồn tại trong previous chưa (...)
-        return pre;           // (...) nếu chưa thì khởi tạo mảng rỗng và đưa cur vào, mảng rỗng thuộc value. nếu đã tồn tại thì push cur vào
-    }, {});   // khởi tạo là 1 object rỗng
+  return arr.reduce((pre, cur) => {
+    (pre[cur[key]] ||= []).push(cur);    // truy cập lấy value của thuộc tính keykiểm tra nó tồn tại trong previous chưa (...)
+    return pre;           // (...) nếu chưa thì khởi tạo mảng rỗng và đưa cur vào, mảng rỗng thuộc value. nếu đã tồn tại thì push cur vào
+  }, {});   // khởi tạo là 1 object rỗng
 }
 console.log(groupBy(employees, "position"));
 
@@ -196,15 +196,15 @@ console.log(groupBy(employees, "position"));
 // 	7	Dùng bind để cố định this cho method log của object logger.
 
 const logger = {
-    text : "Dùng bind để cố định this cho method log của object logger.",
-    log : function( arg = this.text){   // nếu không có input thì nó sẽ in text của object
-        console.log(arg);
-    }
+  text: "Dùng bind để cố định this cho method log của object logger.",
+  log: function (arg = this.text) {   // nếu không có input thì nó sẽ in text của object
+    console.log(arg);
+  }
 }
 const myFunc = logger.log;
 myFunc();   // undefined  --- do chưa cố định this 
 
-const bindFunc = logger.log.bind(logger) ; // chỉ định object logger sẽ luôn là this khi bindFunc được gọi
+const bindFunc = logger.log.bind(logger); // chỉ định object logger sẽ luôn là this khi bindFunc được gọi
 bindFunc();  // Dùng bind để cố định this cho method log của object logger.
 
 bindFunc("Code & Code & Code");  // Code & Code & Code
@@ -214,13 +214,13 @@ bindFunc("Code & Code & Code");  // Code & Code & Code
 // 	8	Chuyển object với giá trị là số thành JSON và parse lại, kiểm tra bằng === (chú ý kiểu).
 
 const object = {
-    numbers : [1,2,3,4,5],
-    13254 : "String"
+  numbers: [1, 2, 3, 4, 5],
+  13254: "String"
 }
 
 const objectConvert = JSON.parse(JSON.stringify(object));
 
-console.log(typeof object , object);                 //object { '13254': 'String', numbers: [ 1, 2, 3, 4, 5 ] }
+console.log(typeof object, object);                 //object { '13254': 'String', numbers: [ 1, 2, 3, 4, 5 ] }
 console.log(typeof objectConvert, objectConvert);    //object { '13254': 'String', numbers: [ 1, 2, 3, 4, 5 ] }
 console.log(object === objectConvert);  // false
 //  Object, Array, Function là kiểu dữ liệu tham chiếu nên === sẽ so sánh bằng địa chỉ tham chiếu của chúng 
@@ -231,59 +231,59 @@ console.log(object === objectConvert);  // false
 //  áp mã giảm giá %, export các hàm. Viết các test case ở cuối file để chứng minh chạy đúng.
 
 const vouchers = {       // Đưa lên đầu để tránh hoisting.
-    jh7w: 10,
-    l03m: 30,
-    u9r8: 50,
-    g7t5: 0,
-    x4c3: 100
+  jh7w: 10,
+  l03m: 30,
+  u9r8: 50,
+  g7t5: 0,
+  x4c3: 100
 };
 
 function _addToCart(cart, product) {
-    if (!cart[product.idProduct]) {      // Phủ định của undefined để thêm vào 
-        cart[product.idProduct] = { ...product, quantity: 1 };   // copy product và thêm quantity
-    } else {
-        cart[product.idProduct].quantity++;   // Nếu đã tồn tại thì tăng quantity lên 1
-    }
+  if (!cart[product.idProduct]) {      // Phủ định của undefined để thêm vào 
+    cart[product.idProduct] = { ...product, quantity: 1 };   // copy product và thêm quantity
+  } else {
+    cart[product.idProduct].quantity++;   // Nếu đã tồn tại thì tăng quantity lên 1
+  }
 };
 function _removeFromCart(cart, idProduct) {
-    if (cart[idProduct]) {    // Nếu tồn tại sẽ cho ra truthy và xoá 
-        delete cart[idProduct];
-    }
+  if (cart[idProduct]) {    // Nếu tồn tại sẽ cho ra truthy và xoá 
+    delete cart[idProduct];
+  }
 };
 function _updateQuantity(cart, idProduct, newQuantity) {
-    if (cart[idProduct] ) {     // check xem product có trong cart không 
-        if(newQuantity > 0){
-            cart[idProduct].quantity = newQuantity;
-        } else {
-            delete cart[idProduct];     // xoá sản phẩn nếu quantity <= 0 ;
-        }
+  if (cart[idProduct]) {     // check xem product có trong cart không 
+    if (newQuantity > 0) {
+      cart[idProduct].quantity = newQuantity;
+    } else {
+      delete cart[idProduct];     // xoá sản phẩn nếu quantity <= 0 ;
     }
+  }
 };
 function _calculateTotal(cart, discount) {
-    const total = Object.values(cart).reduce((sum, product) => {   // Object.values đưa value của cart về 1 array 
-        sum += product.quantity * product.price;     // dùng reduce để sum trở thành biến tích luỹ
-        return sum;
-    }, 0);
-    return total - total * discount / 100;              // tổng = tổng - tổng * giảm giá      ( discount từ myCart ) 
+  const total = Object.values(cart).reduce((sum, product) => {   // Object.values đưa value của cart về 1 array 
+    sum += product.quantity * product.price;     // dùng reduce để sum trở thành biến tích luỹ
+    return sum;
+  }, 0);
+  return total - total * discount / 100;              // tổng = tổng - tổng * giảm giá      ( discount từ myCart ) 
 };
 
 function _applyDiscount(voucher) {
-    return vouchers[voucher] ?? 0;          // sử dụng nullish để kiểm tra, nếu không tồn tại trong vouchers sẽ gán = 0 
+  return vouchers[voucher] ?? 0;          // sử dụng nullish để kiểm tra, nếu không tồn tại trong vouchers sẽ gán = 0 
 }
 
 
 //<<<<<<<<<<<<<<<<<<<<< 
 function CartManager() {
-    const cart = {};
-    let discount = 0;
-    return {
-        getCart: () => { return { ...cart } },
-        addToCart: (product) => _addToCart(cart, product),
-        removeFromCart: (idProduct) => _removeFromCart(cart, idProduct),
-        updateQuantity: (idProduct, newQuantity) => _updateQuantity(cart, idProduct, newQuantity),
-        calculateTotal: () => _calculateTotal(cart, discount),
-        applyDiscount: (voucher) => discount = _applyDiscount(voucher)
-    }
+  const cart = {};
+  let discount = 0;
+  return {
+    getCart: () => { return { ...cart } },
+    addToCart: (product) => _addToCart(cart, product),
+    removeFromCart: (idProduct) => _removeFromCart(cart, idProduct),
+    updateQuantity: (idProduct, newQuantity) => _updateQuantity(cart, idProduct, newQuantity),
+    calculateTotal: () => _calculateTotal(cart, discount),
+    applyDiscount: (voucher) => discount = _applyDiscount(voucher)
+  }
 }
 
 // =================== TEST CASE ===================
