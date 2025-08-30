@@ -1,4 +1,4 @@
-//                  Week 02 - JS_Basic_1
+//                  Week 03 - JS_Advanced_1
 //
 //              =============================
 //
@@ -9,367 +9,333 @@
 //  2) Mini Project
 //
 //
-//              =============================
+//              ===================
 
-//                      1) Bài tập (8 bài)
-//
-// 1)	Viết chương trình phân loại tuổi: <6 (mầm non), 6–11 (tiểu học), 12–15 (THCS), 16–18 (THPT), >18 (khác).
 
-// let age = Number(prompt("Vui lòng nhập tuổi:  "));
-// while (isNaN(age) || age <= 0) {
-//     age = Number(prompt("Tuổi không hợp lệ, vui lòng nhập lại: "));
-// }
-// if (age < 6) {
-//     console.log("Mầm non");
-// } else if (age <= 11) {
-//     console.log("Tiểu học");
-// } else if (age <= 15) {
-//     console.log("THCS");
-// } else if (age <= 18) {
-//     console.log("THPT");
-// } else {
-//     console.log("Khác");
-// }
 
-//          *******************
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<  1) Bài tập (8 bài)  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// 1)	Cho mảng users [{id, name, age}]. Tạo mảng tên những người >= 18 bằng filter+map.
+const users = [
+  { id: 1, name: 'Alice', age: 25 },
+  { id: 2, name: 'Bob', age: 17 },
+  { id: 3, name: 'Charlie', age: 30 },
+  { id: 4, name: 'David', age: 16 },
+  { id: 5, name: 'Eve', age: 22 }
+];
 
-// 2)	Tính tổng số từ 1..n (n nhập vào). In thêm tổng các số chẵn và lẻ.
+const usersFilter = users.filter((ele) => { return ele.age >= 18 })    // lọc các đối tượng >= 18 tuổi.
+const usersMap = usersFilter.map((ele) => { return ele.name });          // chỉ giữ lại name.
+console.log(usersMap)
 
-// let number = Number(prompt("Vui lòng nhập số:  "));
-// while (isNaN(number) || number < 1) {
-//     number = Number(prompt("Số hợp lệ phải lớn hơn 1, vui lòng nhập lại: "));
-// }
-// let sum = 0 ;
-// let sumEven = 0 ;
-// let sumOdd = 0 ;
-// for(let i = 1 ; i <= number ; i ++ ){
-//     sum += i ; 
-//     if (i%2===0){
-//         sumEven += i ; 
-//     }else{
-//         sumOdd += i ; 
+//<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// 2)	Tính tổng đơn hàng: carts [{name, price, qty}]. Dùng reduce để ra tổng tiền và số mặt hàng.
+
+const carts = [
+  { name: 'Sữa tươi', price: 20000, qty: 2 },
+  { name: 'Bánh mì', price: 5000, qty: 5 },
+  { name: 'Nước ngọt', price: 15000, qty: 1 }
+];
+
+const result = carts.reduce((pre, cur) => {
+  pre.total += cur.price * cur.qty;
+  pre.quantity += cur.qty;
+  return pre;
+}, { total: 0, quantity: 0 });   // initialValue là 1 object 2 thuộc tính để tiện lưu trữ giá trị
+
+console.log(`Tổng tiền: ${result.total}\nSố mặt hàng: ${result.quantity}`);
+
+//<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// 	3	Viết hàm counter() dùng closure: có next() trả về số tăng dần, reset().
+
+function counter(starts) {
+  let count = starts;
+  return {
+    next: function () {
+      return ++count;
+    },
+    reset: function () {
+      count = starts;
+      return count;
+    }
+  }
+}
+
+const test = counter(98);
+console.log(test.next())    // 99
+console.log(test.next())    // 100
+console.log(test.reset())   // 98
+
+//<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// 	4	Sắp xếp mảng products theo price tăng/giảm; xử lý khi price bằng nhau theo name.
+
+const iphones = [
+  { name: 'iPhone 15 Pro', storage: '256GB', price: 29000000 },
+  { name: 'iPhone 15', storage: '128GB', price: 22000000 },
+  { name: 'iPhone 14', storage: '128GB', price: 18000000 },
+  { name: 'iPhone 15 Pro Max', storage: '256GB', price: 34000000 },
+  { name: 'iPhone 14 Pro', storage: '128GB', price: 25000000 },
+  { name: 'iPhone 13', storage: '128GB', price: 18000000 }, // Cùng giá với iPhone 14
+  { name: 'iPhone SE', storage: '64GB', price: 10000000 },
+  { name: 'iPhone 15', storage: '128GB', price: 22000000 }  // Cùng giá và tên với phần tử thứ 2
+];
+
+const iphonesCopy = [...iphones];    // tránh mutate 
+iphonesCopy.sort((a,b)=>{    // in-place function 
+    return (a.price - b.price) || a.name.localeCompare(b.name) ;   // nếu chênh lệch giá = 0 thì kiểm tra name 
+});
+console.log(iphonesCopy);
+
+//<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// 	5	Chuyển danh sách key-value thành object và ngược lại (entries <-> fromEntries).
+
+const list = [
+  ['name', 'Alice'],
+  ['age', 30],
+  ['city', 'Hanoi'],
+  ['isAdmin', false],
+];
+
+const fromEntries = Object.fromEntries(list);
+console.log(fromEntries);    // { name: 'Alice', age: 30, city: 'Hanoi', isAdmin: false }
+
+const entries = Object.entries(fromEntries);
+console.log(entries);
+//[
+//   [ 'name', 'Alice' ],
+//   [ 'age', 30 ],
+//   [ 'city', 'Hanoi' ],
+//   [ 'isAdmin', false ]
+// ]
+
+//<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// 	6	Viết hàm groupBy(arr, keyFn) -> object nhóm phần tử theo giá trị key.
+const employees = [
+    { id: 1, name: 'Lê Văn A', position: 'DS', city: 'Hà Nội' },
+    { id: 2, name: 'Nguyễn Thị B', position: 'DEVops', city: 'TP. Hồ Chí Minh' },
+    { id: 3, name: 'Trần Văn C', position: 'AI', city: 'Đà Nẵng' },
+    { id: 4, name: 'Phạm Thị D', position: 'DS', city: 'Hà Nội' },
+    { id: 5, name: 'Hoàng Văn E', position: 'DE', city: 'Hải Phòng' },
+    { id: 6, name: 'Đỗ Thị F', position: 'DEVops', city: 'TP. Hồ Chí Minh' },
+    { id: 7, name: 'Ngô Văn G', position: 'AI', city: 'Cần Thơ' },
+    { id: 8, name: 'Vũ Thị H', position: 'DS', city: 'Hà Nội' },
+    { id: 9, name: 'Bùi Văn I', position: 'DE', city: 'TP. Hồ Chí Minh' },
+    { id: 10, name: 'Lý Thị K', position: 'AI', city: 'Đà Nẵng' },
+    { id: 11, name: 'Dương Văn L', position: 'DS', city: 'Cần Thơ' },
+    { id: 12, name: 'Đào Thị M', position: 'DE', city: 'Hà Nội' },
+    { id: 13, name: 'Trần Văn N', position: 'DEVops', city: 'Hải Phòng' },
+    { id: 14, name: 'Hoàng Thị O', position: 'AI', city: 'TP. Hồ Chí Minh' },
+    { id: 15, name: 'Ngô Văn P', position: 'DE', city: 'Đà Nẵng' }
+];
+
+function groupBy(arr, key) {    // arr là mảng cần xếp, key là thuộc tính để sort 
+    return arr.reduce((pre, cur) => {
+        (pre[cur[key]] ||= []).push(cur);    // truy cập lấy value của thuộc tính keykiểm tra nó tồn tại trong previous chưa (...)
+        return pre;           // (...) nếu chưa thì khởi tạo mảng rỗng và đưa cur vào, mảng rỗng thuộc value. nếu đã tồn tại thì push cur vào
+    }, {});   // khởi tạo là 1 object rỗng
+}
+console.log(groupBy(employees, "position"));
+
+// {
+//   DS: [
+//     { id: 1, name: 'Lê Văn A', position: 'DS', city: 'Hà Nội' },
+//     { id: 4, name: 'Phạm Thị D', position: 'DS', city: 'Hà Nội' },
+//     { id: 8, name: 'Vũ Thị H', position: 'DS', city: 'Hà Nội' },
+//     { id: 11, name: 'Dương Văn L', position: 'DS', city: 'Cần Thơ' }
+//   ],
+//   DEVops: [
+//     {
+//       id: 2,
+//       name: 'Nguyễn Thị B',
+//       position: 'DEVops',
+//       city: 'TP. Hồ Chí Minh'
+//     },
+//     {
+//       id: 6,
+//       name: 'Đỗ Thị F',
+//       position: 'DEVops',
+//       city: 'TP. Hồ Chí Minh'
+//     },
+//     {
+//       id: 13,
+//       name: 'Trần Văn N',
+//       position: 'DEVops',
+//       city: 'Hải Phòng'
 //     }
-// }
-// console.log(`- Tổng số từ 1 đến ${number}: ${sum}
-// - Tổng số "chẵn" từ 1 đến ${number}: ${sumEven}
-// - Tổng số "lẻ" từ 1 đến ${number}: ${sumOdd}`);
-
-//          *******************
-
-// 3)	Tạo mảng scores. Tính min, max, average thủ công bằng vòng lặp.
-
-// let input = prompt("Nhập mảng điểm các môn của bạn: ").trim().split(" ");    // tạo mạng điểm đầu vào, nó đang dạng string
-// let scores = [];   // mảng để chứa điểm sau khi convert và check hợp lệ 
-// let flag = true ;
-// while (flag) {           // khi all phần tử đều hợp lệ thì ngưng, ngược lại sẽ yêu cầu nhập lại mảng điểm
-//     flag = false;
-//     for (let i = 0; i < input.length; i++) {     // duyệt qua từng phần tử của input ban đầu
-//         if(input[i] === ""){    // tránh trường hợp space liên tiếp "0   0 0 0    0"
-//             continue ;
-//         }else if (!isNaN(Number(input[i]))) {  // ép kiểu kiểm tra xem có phải number không
-//             scores.push(Number(input[i]));    // đúng thì push vào mảng scores 
-//         } else {         // khi xuất hiện lỗi input 
-//             scores = [] ; // reset lại về rỗng 
-//             flag = true;         // để while lặp lại 
-//             input = prompt("Điểm bạn nhập không hợp lệ, vui lòng nhập lại: ").trim().split(" ");
-//             break;   // kết thúc for và while sẽ chạy 
-//         }
+//   ],
+//   AI: [
+//     { id: 3, name: 'Trần Văn C', position: 'AI', city: 'Đà Nẵng' },
+//     { id: 7, name: 'Ngô Văn G', position: 'AI', city: 'Cần Thơ' },
+//     { id: 10, name: 'Lý Thị K', position: 'AI', city: 'Đà Nẵng' },
+//     {
+//       id: 14,
+//       name: 'Hoàng Thị O',
+//       position: 'AI',
+//       city: 'TP. Hồ Chí Minh'
 //     }
-// }
-// let min = scores[0];
-// let max = scores[0];
-// let average = 0;
-// let sum = 0;
-// for (let i = 0; i < scores.length; i++) {
-//     if (scores[i] > max) {
-//         max = scores[i];
-//     }
-//     if (scores[i] < min) {
-//         min = scores[i];
-//     }
-//     sum += scores[i];
-// }
-// average = sum / scores.length;
-// console.log(`Scores: ${scores}
-// Min: ${min}
-// Max: ${max}
-// Average: ${average}`);
-
-
-// Ở đây mảng có sẵn không cần convert input nên ngắn hơn
-
-// const scores = [1, 0, 2, 4, 5, 0, -3, 2, -4, 2];
-// let min = scores[0];
-// let max = scores[0];
-// let average = 0;
-// let sum = 0;
-// for (const score of scores) {
-//     if (score > max) {
-//         max = score;
-//     }
-//     if (score < min) {
-//         min = score;
-//     }
-//     sum += score;
-// }
-// average = sum / scores.length;
-// console.log(`Scores: ${scores}
-// Min: ${min}
-// Max: ${max}
-// Average: ${average}`)
-
-//          *******************
-
-// 4)	Đảo ngược chuỗi s (vd: 'hello' -> 'olleh') không dùng hàm reverse sẵn cho array.
-
-// let input = prompt("Nhập chuỗi: ").trim();
-// let result = "";
-// for (let char of input ){
-//     result = char + result ;   // duyệt theo chiều xuôi nhưng cộng ngược
-// }
-// console.log(result);
-
-
-
-// const input = prompt("Nhập chuỗi: ").trim().split("");     // input phải là 1 iterable mới sd reduce được
-// const result = input.reduce(function reverse(previousValue, currentValue) {
-//     return  currentValue +  previousValue ;
-// })
-// console.log(result);
-
-//          *******************
-
-
-// 5)	Đếm số nguyên tố trong mảng numbers (gợi ý: viết hàm isPrime).
-
-// function isPrime(number) {
-//     if (number < 2) {  // Không có số nguyên tố nào bé hơn 2
-//         return false;
-//     }
-//     else if (number <= 3) {  // vì 2 & 3 là số nguyên tố
-//         return true;
-//     }
-//     if (number % 2 == 0 || number % 3 == 0) {  // 2 & 3 đã xét ở trên , nên chỉ có thể chia hết cho 1 và chính nó, nếu thoã nó là false
-//         return false;
-//     }
-//     let i = 5  // Các số nguyên tố lớn hơn 3 đều có dạng 6k +- 1                5 7 11 13 17 19 .......
-//     while (i ** 2 <= number) {
-//         if (number % i == 0 || number % (i + 2) == 0) {
-//             return false;
-//         }
-//         i += 6;
-//     }
-//     return true;
-// }
-// function countPrime(numbers) {
-//     let count = 0;
-//     for(const number of numbers ) {
-//         if (isPrime(number)) {
-//             count++;
-//         }
-//     }
-//     return count;
-// }
-// const numbers = [1, 3, 4, 5, 6, 7, 12, 13, 14, 20, 21, 23, 70];
-// console.log(numbers);
-// console.log(`Số lượng số nguyên tố có trong mảng là: ${countPrime(numbers)}`);
-
-//          *******************
-
-// 6	Tìm phần tử xuất hiện nhiều nhất trong mảng (mode) và số lần xuất hiện.
-
-// const numbers = [1, 5, 2, 8, 2, 5, 5, 1, 8, 8, 8, 8];
-// const dictObject = numbers.reduce(function myFilter(previousValue, currentValue) {    //đưa về dạng array object, key là giá trị và value là số lần xuất hiện 
-//     if (previousValue[currentValue]) {      // key và value đã tồn tại , chỉ cần tăng value lên 1
-//         ++previousValue[currentValue]   
-//     } else {
-//         previousValue[currentValue] = 1;      // khởi tạo thuộc tính mới và ban đầu mang giá trị 1 
-//     }
-//     return previousValue;     
-// },{});
-// let compare = dictObject[numbers[0]];       // compare lưu số lần xuất hiện , dùng để xem cái nào xuất hiện nhiều nhất 
-// let result = numbers[0] ;   // nó là giá trị cần tìm 
-// for (const [key, val] of Object.entries(dictObject)) {       // entry trả về cặp key và value  
-//     if(val > compare){
-//         result = key ;
-//         compare = val ;
-//     }
-// }
-// console.log(`Numbers: ${numbers}`);
-// console.log("Array object:" , dictObject);
-// console.log(`Mode in numbers: ${result}`);
-
-//          *******************
-
-// 7)	Tạo mảng todo (chuỗi). Viết menu (switch) để: thêm, xóa theo chỉ số, in danh sách.
-// Bài này giải theo hướng sử dụng của sổ pop-up là thông báo hiển thị là chính
-
-// let toDo = ["Danh sách công việc: \n"];
-// const menu = `Menu: 
-// 1, Xem danh sách.
-// 2, Thêm.
-// 3, Xoá.
-// 0, Thoát.`;
-// // có thể sử dụng flag và while, em mới đọc thấy lable nên muốn thực hành để rõ hơn.
-// lableStart: while(true){        // sử dụng lable và while ý đồ muốn người dùng thao tác mãi trên pop-up
-// let input = prompt(menu);
-// switch (input){
-//     case ("1"):
-//         toDoOut = toDo[0] ;
-//         for(let i = 1 ; i < toDo.length ; i ++){
-//             toDoOut +=  i + ", " + toDo[i];
-//         }
-//         alert(toDoOut);
-//         continue lableStart ; 
-//     case ("2"):
-//         input = (prompt("Nhập công việc cần thêm: ").trim() + "\n");
-//         input = input.charAt(0).toUpperCase() + input.slice(1);
-//         if(input !== ""){
-//             toDo.push(input)
-//             alert("Đã thêm thành công.");
-//         }
-//         else {
-//             alert("Thêm không thành công!");
-//         }
-//         continue lableStart ; 
-//     case ("3"):
-//         let index = Number(prompt("Nhập số thứ thự công việc cần xoá: "));
-//         if( isNaN(index)|| index > toDo.length -1 || index < 1){
-//             alert("Số vừa nhập không hợp lệ, vui lòng thử lại sau.");
-//         }else{
-//             toDo = toDo.slice(0 , index ).concat(toDo.slice(index+1));
-//             alert("Đã xoá thành công.");
-//         }
-//         continue lableStart;
-//     case ("0"):
-//         alert("Thoát thành công.")
-//         break lableStart ;   // chỉ khi thực sự out mới out 
-//     default:
-//         alert("Vui lòng chọn lại")
-//         continue lableStart;
-//     }
+//   ],
+//   DE: [
+//     { id: 5, name: 'Hoàng Văn E', position: 'DE', city: 'Hải Phòng' },
+//     {
+//       id: 9,
+//       name: 'Bùi Văn I',
+//       position: 'DE',
+//       city: 'TP. Hồ Chí Minh'
+//     },
+//     { id: 12, name: 'Đào Thị M', position: 'DE', city: 'Hà Nội' },
+//     { id: 15, name: 'Ngô Văn P', position: 'DE', city: 'Đà Nẵng' }
+//   ]
 // }
 
-//          *******************
+//<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
 
-// 8	Viết trò chơi đoán số từ 1..100 (random). Gợi ý lớn/nhỏ cho đến khi đoán đúng, đếm số lần đoán.
+// 	7	Dùng bind để cố định this cho method log của object logger.
+
+const logger = {
+    text : "Dùng bind để cố định this cho method log của object logger.",
+    log : function( arg = this.text){   // nếu không có input thì nó sẽ in text của object
+        console.log(arg);
+    }
+}
+const myFunc = logger.log;
+myFunc();   // undefined  --- do chưa cố định this 
+
+const bindFunc = logger.log.bind(logger) ; // chỉ định object logger sẽ luôn là this khi bindFunc được gọi
+bindFunc();  // Dùng bind để cố định this cho method log của object logger.
+
+bindFunc("Code & Code & Code");  // Code & Code & Code
+
+//<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// 	8	Chuyển object với giá trị là số thành JSON và parse lại, kiểm tra bằng === (chú ý kiểu).
+
+const object = {
+    numbers : [1,2,3,4,5],
+    13254 : "String"
+}
+
+const objectConvert = JSON.parse(JSON.stringify(object));
+
+console.log(typeof object , object);                 //object { '13254': 'String', numbers: [ 1, 2, 3, 4, 5 ] }
+console.log(typeof objectConvert, objectConvert);    //object { '13254': 'String', numbers: [ 1, 2, 3, 4, 5 ] }
+console.log(object === objectConvert);  // false
+//  Object, Array, Function là kiểu dữ liệu tham chiếu nên === sẽ so sánh bằng địa chỉ tham chiếu của chúng 
 
 
-// function getRandomInt() {
-//   return Math.floor(Math.random() * 100) + 1;   // Math.random sinh ra 0-0.9999 // *100 và floor làm tròn xuống sẽ sinh ra 0-99 , +1 để trở thành 1-100
-// }
-// const secret = getRandomInt(1, 100);
-// let count = 0 ;
-// while (true) {
-//     count ++ ;
-//     let guess = parseInt(prompt("Nhập số: "));
-//     if (guess === secret){
-//         alert("Đúng.")
-//         break;
-//     }
-//     if(guess > secret){
-//         alert("Bé hơn.")
-//     }else{    // else được vì trường hợp === đã được xử lý
-//         alert("Lớn hơn.")
-//     }
-// }
-// const result = `Số lần bạn đã đoán là: ${count}`
-// alert(result);
+// 3) Mini Project
+// Xây dựng module quản lý giỏ hàng: thêm/sửa/xóa sản phẩm, tính tổng tiền,
+//  áp mã giảm giá %, export các hàm. Viết các test case ở cuối file để chứng minh chạy đúng.
 
-//              =============================
+const vouchers = {       // Đưa lên đầu để tránh hoisting.
+    jh7w: 10,
+    l03m: 30,
+    u9r8: 50,
+    g7t5: 0,
+    x4c3: 100
+};
 
-/*3) Mini Project
-Viết chương trình quản lý học sinh đơn giản: 
-nhập danh sách điểm (array), in bảng xếp loại theo thang A/B/C/D, 
-tính điểm trung bình, điểm cao nhất, thấp nhất; kèm menu thao tác (thêm/xóa/in).
-// */
+function _addToCart(cart, product) {
+    if (!cart[product.idProduct]) {      // Phủ định của undefined để thêm vào 
+        cart[product.idProduct] = { ...product, quantity: 1 };   // copy product và thêm quantity
+    } else {
+        cart[product.idProduct].quantity++;   // Nếu đã tồn tại thì tăng quantity lên 1
+    }
+};
+function _removeFromCart(cart, idProduct) {
+    if (cart[idProduct]) {    // Nếu tồn tại sẽ cho ra truthy và xoá 
+        delete cart[idProduct];
+    }
+};
+function _updateQuantity(cart, idProduct, newQuantity) {
+    if (cart[idProduct] ) {     // check xem product có trong cart không 
+        if(newQuantity > 0){
+            cart[idProduct].quantity = newQuantity;
+        } else {
+            delete cart[idProduct];     // xoá sản phẩn nếu quantity <= 0 ;
+        }
+    }
+};
+function _calculateTotal(cart, discount) {
+    const total = Object.values(cart).reduce((sum, product) => {   // Object.values đưa value của cart về 1 array 
+        sum += product.quantity * product.price;     // dùng reduce để sum trở thành biến tích luỹ
+        return sum;
+    }, 0);
+    return total - total * discount / 100;              // tổng = tổng - tổng * giảm giá      ( discount từ myCart ) 
+};
 
-// let listScores = ["Danh sách điểm: \n"];
-// const menu = `Menu: 
-// 1, Xem danh sách điểm.
-// 2, Thêm.
-// 3, Xoá.
-// 4, Điểm TB, max & min.
-// 0, Thoát.`;
+function _applyDiscount(voucher) {
+    return vouchers[voucher] ?? 0;          // sử dụng nullish để kiểm tra, nếu không tồn tại trong vouchers sẽ gán = 0 
+}
 
-// function convertScore(score) {
-//     if (score > 8) {
-//         return "A";
-//     } else if (score > 6) {
-//         return "B";
-//     } else if (score > 4) {
-//         return "C";
-//     } else {
-//         return "D";
-//     }
-// }
-// let scores = [];
-// let flagAverageMaxMin = false;
 
-// lableStart: while (true) {
-//     let input = prompt(menu);
-//     switch (input) {
-//         case ("1"):
-//             toDoOut = listScores[0];
-//             for (let i = 1; i < listScores.length; i++) {
-//                 toDoOut += i + ", " + listScores[i];
-//             }
-//             alert(toDoOut);
-//             continue lableStart;
-//         case ("2"):
-//             input = (prompt("Điểm muốn thêm: ").trim().split(" "));
-//             let countNo = 0;
-//             let countYes = 0;
-//             for (let score of input) {
-//                 score = Number(score)
-//                 if (score !== "") {
-//                     if (isNaN(score) || score < 0 || score > 10) {
-//                         countNo++;
-//                     } else {
-//                         scores.push(score);
-//                         countYes++;
-//                         listScores.push(convertScore(score) + "\n");
-//                     }
-//                 }
+//<<<<<<<<<<<<<<<<<<<<< 
+function CartManager() {
+    const cart = {};
+    let discount = 0;
+    return {
+        getCart: () => { return { ...cart } },
+        addToCart: (product) => _addToCart(cart, product),
+        removeFromCart: (idProduct) => _removeFromCart(cart, idProduct),
+        updateQuantity: (idProduct, newQuantity) => _updateQuantity(cart, idProduct, newQuantity),
+        calculateTotal: () => _calculateTotal(cart, discount),
+        applyDiscount: (voucher) => discount = _applyDiscount(voucher)
+    }
+}
 
-//             }
-//             if (countNo) {
-//                 alert("Xuất hiện " + countNo + " điểm không hợp lệ, " + countNo + " điểm sẽ không được thêm vào!");
-//             }
-//             alert("Đã thêm thành công " + countYes + " điểm.");
-//             continue lableStart;
-//         case ("3"):
-//             let index = Number(prompt("Nhập số thứ thự điểm cần xoá: "));
-//             if (isNaN(index) || index > listScores.length - 1 || index < 1) {
-//                 alert("Số vừa nhập không hợp lệ, vui lòng thử lại sau.");
-//             } else {
-//                 scores = scores.slice(0, index - 1).concat(scores.slice(index));
-//                 listScores = listScores.slice(0, index).concat(listScores.slice(index + 1));
-//                 alert("Đã xoá thành công.")
-//             }
-//             continue lableStart;
-//         case ("4"):        // sử dụng average , max , min chung 1 lần vì có thể tính 3 giá trị trong 1 lần lặp
-//             let max = 0;
-//             let min = 10;
-//             let sum = 0;
-//             for (const score of scores) {
-//                 if (score > max) {
-//                     max = score;
-//                 }
-//                 if (score < min) {
-//                     min = score;
-//                 }
-//                 sum += score;
-//             }
+// =================== TEST CASE ===================
+const product = { name: "Mouse", idProduct: "a3R6", price: 200 };
+const product2 = { name: "Keyboard", idProduct: "b7h5", price: 50 };
 
-//             let result = "Average: " + sum / scores.length + "\nMax: " + max + "\nMin: " + min + "\n";
-//             alert(result);
-//             continue lableStart;
-//         case ("0"):
-//             alert("Thoát thành công.");
-//             break lableStart;
-//         default:
-//             alter("Vui lòng chọn lại");
-//             continue lableStart;
-//     }
-// }
+const myCart = CartManager();
+
+console.log('--- Test 1: Thêm sản phẩm ---');
+myCart.addToCart(product);
+myCart.addToCart(product);
+myCart.addToCart(product2);
+console.log(myCart.getCart());
+// Expected: Msc x2, Keyboard x1
+
+console.log('\n--- Test 2: Tính tổng ban đầu ---');
+console.log(myCart.calculateTotal());
+// Expected: 2*200 + 1*50 = 450
+
+console.log('\n--- Test 3: Áp voucher jh7w (10%) ---');
+myCart.applyDiscount('jh7w');
+console.log(myCart.calculateTotal());
+// Expected: 405
+
+console.log('\n--- Test 4: Áp voucher l03m (30%) ---');
+myCart.applyDiscount('l03m');
+console.log(myCart.calculateTotal());
+// Expected: 315
+
+console.log('\n--- Test 5: Xóa sản phẩm a3R6 ---');
+myCart.removeFromCart('a3R6');
+console.log(myCart.getCart());
+console.log(myCart.calculateTotal());
+// Expected: Keyboard x1 → 50 * 0.7 = 35
+
+console.log('\n--- Test 6: Cập nhật Keyboard lên 5 ---');
+myCart.updateQuantity('b7h5', 5);
+console.log(myCart.getCart());
+console.log(myCart.calculateTotal());
+// Expected: 250 * 0.7 = 175
+
+console.log('\n--- Test 7: Voucher không tồn tại ---');
+myCart.applyDiscount('xxxx');
+console.log(myCart.calculateTotal());
+// Expected: 250 vì discount = 0 
+
+console.log('\n--- Test 8: Voucher 100% (x4c3) ---');
+myCart.applyDiscount('x4c3');
+console.log(myCart.calculateTotal());
+// Expected: 0 (miễn phí hoàn toàn)
+
+console.log('\n--- Test 9: Cập nhật Keyboard = 0 (tự động xóa) ---');
+myCart.updateQuantity('b7h5', 0);
+console.log(myCart.getCart());
+// Expected: {}
